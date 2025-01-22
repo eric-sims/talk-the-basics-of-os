@@ -1,0 +1,7 @@
+os/exec
+- there is exec.Run() and exec.Start(). Run() is a blocking statement and Start() will
+asynchronously start. cmd.Wait() makes the program wait for Start().
+
+
+
+Should I play a game called "can you guess the terminal command?"

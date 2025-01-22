@@ -97,51 +97,173 @@ TODO: add details
 - errors handled in the "Go way"
 - why it matters: file manipulation, system configuration, and process control
 
+## Let's play a game!
+- What is the shell equivalent to the following functions in golang's `os` library?
 
+//-----------------------------------------------------------------------------------------
 ## File Operations
 .play -edit examples/os_files.go /START OMIT/,/END OMIT/
 
+
+## File Operations
+.play -edit examples/os_files.go /START OMIT/,/END OMIT/
+Same as:
+```
+touch example.txt
+echo "Hello, Go! > example.txt"
+cat example.txt` (kind of, not really)
+```
+//-----------------------------------------------------------------------------------------
 ## Temporary Files
 .play -edit examples/os_tempFiles.go /START OMIT/,/END OMIT/
 - Replaces last "*" with random string. If not defined, it will place random string at end.
 - Empty directory location stores files as defined in os.TempDir()
 
+Is there a shell command like this?
+
+## Temporary Files
+.play -edit examples/os_tempFiles.go /START OMIT/,/END OMIT/
+```
+ mktemp -t someStuff_XXXX.txt
+```
+//-----------------------------------------------------------------------------------------
+## Get Working Directory
+.play -edit examples/os_wd.go /START OMIT/,/END OMIT/
+
+## Get Working Directory
+.play -edit examples/os_wd.go /START OMIT/,/END OMIT/
+```
+pwd
+```
+//-----------------------------------------------------------------------------------------
 ## Changing Directories
 .play -edit examples/os_changeDirectories.go /START OMIT/,/END OMIT/
 
+## Changing Directories
+.play -edit examples/os_changeDirectories.go /START OMIT/,/END OMIT/
+```
+pwd
+cd examples
+pwd
+```
+//-----------------------------------------------------------------------------------------
 ## Directory Management
 .play -edit examples/os_directories.go /START OMIT/,/END OMIT/
+
+## Directory Management
+.play -edit examples/os_directories.go /START OMIT/,/END OMIT/
+```
+mkdir example_dir
+rm -rf example_dir
+```
+//-----------------------------------------------------------------------------------------
 
 ## Permissions, Modifying Files
 .play -edit examples/os_permissions.go /START OMIT/,/END OMIT/
 
+## Permissions, Modifying Files
+.play -edit examples/os_permissions.go /START OMIT/,/END OMIT/
+```
+chmod tmp 0755
+```
+//-----------------------------------------------------------------------------------------
 ## Environment Variables
 .play -edit examples/os_envs.go /START OMIT/,/END OMIT/
 
+## Environment Variables
+.play -edit examples/os_envs.go /START OMIT/,/END OMIT/
+```
+RANDOM_ENV='Hello, world!'; echo $RANDOM_ENV
+```
+//-----------------------------------------------------------------------------------------
 ## Expand Env
 .play -edit examples/os_expandEnv.go /START OMIT/,/END OMIT/
-
+//-----------------------------------------------------------------------------------------
 ## Expand
 .play -edit examples/os_expand.go /START OMIT/,/END OMIT/
 - replaces ${var} or $var in the string based on the mapping function
+//-----------------------------------------------------------------------------------------
+## Appending to a file
+.play -edit examples/os_appendToFile
 
-## Get Working Directory
-.play -edit examples/os_wd.go /START OMIT/,/END OMIT/
-
-## Rewrite 'ls'
-.play -edit examples/os_ls.go /START OMIT/,/END OMIT/
-
-## Processes
-.play -edit examples/os_pid.go /START OMIT/,/END OMIT/
-
+TODO: explain difference between > and >>
+//-----------------------------------------------------------------------------------------
+//## Rewrite 'ls'
+//.play -edit examples/os_ls.go /START OMIT/,/END OMIT/
+//-----------------------------------------------------------------------------------------
+//## Processes
+//.play -edit examples/os_pid.go /START OMIT/,/END OMIT/
+//-----------------------------------------------------------------------------------------
 ## This is bad!!
 .play -edit examples/os_rootBad.go /START OMIT/,/END OMIT/
+- Watch out for what input you allow a program to have.
 
-## Root (new! 1.24)
+## Root (new! go 1.24)
 .play -edit examples/os_root.go /START OMIT/,/END OMIT/
 
 : can play with "someOtherDir/../someOtherDir/hello.txt"
+: prevents access to files and directories not in this root
+: great consideration for security
+//-----------------------------------------------------------------------------------------
+## os/exec
 
-## Let's build a shell!
-How I used these packages in a personal project:
-[TinyGoShell](https://github.com/eric-sims/TinyGoShell)
+//-----------------------------------------------------------------------------------------
+
+
+## Run versus Start
+Run
+
+.play -edit examples/os_exec_run.go /START OMIT/,/END OMIT/
+Start
+
+.play -edit examples/os_exec_start.go /START OMIT/,/END OMIT/
+
+- Can we do the same in a shell?
+
+## Run versus Start
+Run
+
+`./(something)`
+
+Start
+
+`./(something) &`
+//-----------------------------------------------------------------------------------------
+
+## Piping (Mario's dream)
+stdin
+
+.play -edit examples/os_exec_stdinPipe.go /START OMIT/,/END OMIT/
+
+## Piping (Mario's dream)
+stdin
+
+.play -edit examples/os_exec_stdinPipe.go /START OMIT/,/END OMIT/
+```
+echo "this is being written to stdin" | cat
+```
+//-----------------------------------------------------------------------------------------
+## Piping (Mario's dream)
+stdout
+
+.play -edit examples/os_exec_stdoutPipe.go /START OMIT/,/END OMIT/
+
+## Piping (Mario's dream)
+stdout
+
+.play -edit examples/os_exec_stdoutPipe.go /START OMIT/,/END OMIT/
+```
+echo -n '{"Name": "Bob", "Age": 32}' | jq -r '"\(.Name) is \(.Age) years old"'
+```
+//-----------------------------------------------------------------------------------------
+## os/signal
+
+//-----------------------------------------------------------------------------------------
+
+## os/signal
+- crucial for communications of non-go programs that call Go code
+//-----------------------------------------------------------------------------------------
+## os/user
+
+//-----------------------------------------------------------------------------------------
+
