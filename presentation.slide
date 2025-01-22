@@ -25,42 +25,37 @@ e.sims@icloud.com
 - When should we _NOT_ make a package?
 
 ## What is their usefulness?
-
-
-## What is their usefulness?
-- code reusability
-- modularity and maintainability
-- separation of concerns
-- time savings
-- establishing standard conformity
+- Code reusability
+- Modularity and maintainability
+- Separation of concerns
+- Time savings
+- Establishing standards
+- Conforming to regulations (sometimes?)
 
 : encapsulates logic
 : no need to reinvent the wheel
-: standard conformity - other engineering disciplines have this
-: must conform to certain protocols or SOPs
+: standards allow the company to maintain a more unified codebase
+: conforming - using libraries with certain cryptographic protocols
 
 ## When to not use/make one
-
-
-## When to not use/make one
-- overhead for small programs (embedded devices)
-- premature modularity
-- no shared or reusable logic
-- dependency management concerns
-- legal or licensing concerns
+- Overhead for small programs (embedded devices)
+- Premature modularity
+- No shared or reusable logic
+- Dependency management concerns
+- Legal or licensing concerns
 
 : be sure to double check that the 3rd party packages you use are kosher for use @vivint
 
 ## standard libraries
-- built-in packages
-- pre-written, commonly used packages
+- Built-in packages
+- Pre-written, commonly used packages
 - Common standard libraries
-  - ways to deal with data types (strings)
-  - input/output interaction and signal processing
-  - multi-threaded programming
-  - date & time
-  - math
-  - error handling
+  - Ways to deal with data types (strings)
+  - Input/output interaction and signal processing
+  - Multi-threaded programming
+  - Date & time
+  - Math
+  - Error handling
 
 : no need to import the package or download it from the internet
 : written and managed by the languages designers
@@ -68,7 +63,14 @@ e.sims@icloud.com
 : i/o - print statements, file management/creation,
 : go's HTTP library was a little too bare bones, so used Gin/Echo. But looks better to use solely in later versions.
 
-## How big should standard libraries be?
+## standard libraries
+- What are things to look for in a standard library when deciding to use a programming language?
+
+## standard libraries
+- What are things to look for in a standard library when deciding to use a programming language?
+- Should the standard library be a part of our consideration process?
+
+## Scope of standard library
 - Minimalist
   - _Tends to_ have better documentation
 - "Batteries included"
@@ -80,7 +82,11 @@ e.sims@icloud.com
 : C#, Python - "batteries included"
 
 ## Other ways of comparing standard libraries
-TODO: add details
+- Performance
+- Portability
+- Documentation
+
+: portability - cross platform?
 
 ## Case for using standard library as much as possible
 
@@ -89,31 +95,93 @@ TODO: add details
 : Show the println example
 : Stdlib is good if you have to think about program size (i.e. embedded)
 
-
 ## Golang os package
 
 ## os
-- platform-agnostic, Unix-like way of interacting with operating system
-- errors handled in the "Go way"
-- why it matters: file manipulation, system configuration, and process control
+- Platform-agnostic, Unix-like way of interacting with operating system
+  - Portable!
+- Errors handled in the "Go way"
+- Most useful: Can write scripts
+  - Environment variables, files/directory management, signal handling, piping, temporary files
+  - Type safety and error handling - improvements over bash
+  - Libraries!
+
+: Ability to make a shell-equivalent script while simultaneously having access to other powerful libraries
 
 ## Let's play a game!
 - What is the shell equivalent to the following functions in golang's `os` library?
 
-//-----------------------------------------------------------------------------------------
+## Get Working Directory
+.play -edit examples/os_wd.go /START OMIT/,/END OMIT/
+
+## Get Working Directory
+.play -edit examples/os_wd.go /START OMIT/,/END OMIT/
+Similar to:
+```
+pwd
+```
+
+## Changing Directories
+.play -edit examples/os_changeDirectories.go /START OMIT/,/END OMIT/
+
+## Changing Directories
+.play -edit examples/os_changeDirectories.go /START OMIT/,/END OMIT/
+Similar to:
+```
+pwd
+cd examples
+pwd
+```
+
+## Directory Management
+.play -edit examples/os_directories.go /START OMIT/,/END OMIT/
+
+## Directory Management
+.play -edit examples/os_directories.go /START OMIT/,/END OMIT/
+Similar to:
+```
+mkdir example_dir
+rm -rf example_dir
+```
+
 ## File Operations
 .play -edit examples/os_files.go /START OMIT/,/END OMIT/
 
 
 ## File Operations
 .play -edit examples/os_files.go /START OMIT/,/END OMIT/
-Same as:
+Similar to:
 ```
 touch example.txt
 echo "Hello, Go! > example.txt"
 cat example.txt` (kind of, not really)
 ```
-//-----------------------------------------------------------------------------------------
+
+## Editing a file
+.play -edit examples/os_appendToFile.go /START OMIT/,/END OMIT/
+
+: called redirection operator
+
+## Editing a file
+Stream redirection (for files)
+- `<` stdin
+- `>` stdout
+- `2>` stderr
+- Commands with double angled brackets do NOT overwrite destination's existing contents.
+
+Write to a file:
+```
+echo "Hello, world!" > temp.txt
+```
+Append to a file
+```
+echo "How are you?" >> temp.txt
+```
+
+Pipes (`|`) are for connecting two program streams together, brackets (`>`) are just meant to be written to a file.
+
+: redirect to stdin (<) example: a file contains a list of inputs for a program
+
 ## Temporary Files
 .play -edit examples/os_tempFiles.go /START OMIT/,/END OMIT/
 - Replaces last "*" with random string. If not defined, it will place random string at end.
@@ -123,77 +191,44 @@ Is there a shell command like this?
 
 ## Temporary Files
 .play -edit examples/os_tempFiles.go /START OMIT/,/END OMIT/
+Similar to:
 ```
- mktemp -t someStuff_XXXX.txt
+mktemp -t someStuff_XXXX.txt
 ```
-//-----------------------------------------------------------------------------------------
-## Get Working Directory
-.play -edit examples/os_wd.go /START OMIT/,/END OMIT/
-
-## Get Working Directory
-.play -edit examples/os_wd.go /START OMIT/,/END OMIT/
-```
-pwd
-```
-//-----------------------------------------------------------------------------------------
-## Changing Directories
-.play -edit examples/os_changeDirectories.go /START OMIT/,/END OMIT/
-
-## Changing Directories
-.play -edit examples/os_changeDirectories.go /START OMIT/,/END OMIT/
-```
-pwd
-cd examples
-pwd
-```
-//-----------------------------------------------------------------------------------------
-## Directory Management
-.play -edit examples/os_directories.go /START OMIT/,/END OMIT/
-
-## Directory Management
-.play -edit examples/os_directories.go /START OMIT/,/END OMIT/
-```
-mkdir example_dir
-rm -rf example_dir
-```
-//-----------------------------------------------------------------------------------------
 
 ## Permissions, Modifying Files
 .play -edit examples/os_permissions.go /START OMIT/,/END OMIT/
 
 ## Permissions, Modifying Files
 .play -edit examples/os_permissions.go /START OMIT/,/END OMIT/
+Similar to:
 ```
 chmod tmp 0755
 ```
-//-----------------------------------------------------------------------------------------
+
 ## Environment Variables
 .play -edit examples/os_envs.go /START OMIT/,/END OMIT/
 
 ## Environment Variables
 .play -edit examples/os_envs.go /START OMIT/,/END OMIT/
+Similar to:
 ```
 RANDOM_ENV='Hello, world!'; echo $RANDOM_ENV
 ```
-//-----------------------------------------------------------------------------------------
+
 ## Expand Env
 .play -edit examples/os_expandEnv.go /START OMIT/,/END OMIT/
-//-----------------------------------------------------------------------------------------
+
 ## Expand
 .play -edit examples/os_expand.go /START OMIT/,/END OMIT/
 - replaces ${var} or $var in the string based on the mapping function
-//-----------------------------------------------------------------------------------------
-## Appending to a file
-.play -edit examples/os_appendToFile
 
-TODO: explain difference between > and >>
-//-----------------------------------------------------------------------------------------
-//## Rewrite 'ls'
-//.play -edit examples/os_ls.go /START OMIT/,/END OMIT/
-//-----------------------------------------------------------------------------------------
-//## Processes
-//.play -edit examples/os_pid.go /START OMIT/,/END OMIT/
-//-----------------------------------------------------------------------------------------
+## Processes
+.play -edit examples/os_pid.go /START OMIT/,/END OMIT/
+
+## Rewrite 'ls'
+.play -edit examples/os_ls.go /START OMIT/,/END OMIT/
+
 ## This is bad!!
 .play -edit examples/os_rootBad.go /START OMIT/,/END OMIT/
 - Watch out for what input you allow a program to have.
@@ -204,11 +239,8 @@ TODO: explain difference between > and >>
 : can play with "someOtherDir/../someOtherDir/hello.txt"
 : prevents access to files and directories not in this root
 : great consideration for security
-//-----------------------------------------------------------------------------------------
+
 ## os/exec
-
-//-----------------------------------------------------------------------------------------
-
 
 ## Run versus Start
 Run
@@ -228,42 +260,47 @@ Run
 Start
 
 `./(something) &`
-//-----------------------------------------------------------------------------------------
 
 ## Piping (Mario's dream)
-stdin
+Stdin
 
 .play -edit examples/os_exec_stdinPipe.go /START OMIT/,/END OMIT/
 
 ## Piping (Mario's dream)
-stdin
+Stdin
 
 .play -edit examples/os_exec_stdinPipe.go /START OMIT/,/END OMIT/
+Similar to:
 ```
 echo "this is being written to stdin" | cat
 ```
-//-----------------------------------------------------------------------------------------
+
 ## Piping (Mario's dream)
-stdout
+Stdout
 
 .play -edit examples/os_exec_stdoutPipe.go /START OMIT/,/END OMIT/
 
 ## Piping (Mario's dream)
-stdout
+Stdout
 
 .play -edit examples/os_exec_stdoutPipe.go /START OMIT/,/END OMIT/
+Similar to:
 ```
 echo -n '{"Name": "Bob", "Age": 32}' | jq -r '"\(.Name) is \(.Age) years old"'
 ```
-//-----------------------------------------------------------------------------------------
-## os/signal
-
-//-----------------------------------------------------------------------------------------
 
 ## os/signal
-- crucial for communications of non-go programs that call Go code
-//-----------------------------------------------------------------------------------------
+
+## os/signal
+- Crucial for communications of non-go programs that call Go code
+
+## Notify
+.play -edit examples/os_signal_notify.go /START OMIT/,/END OMIT/
+
+: remove os.Interrupt in order to accept all signals
+: we use this in our software to provide some cleanup before the program is terminated
+
 ## os/user
 
-//-----------------------------------------------------------------------------------------
-
+## Get user info
+.play -edit examples/os_user_group.go /START OMIT/,/END OMIT/

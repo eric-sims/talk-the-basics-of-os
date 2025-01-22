@@ -26,9 +26,4 @@ func main() {
 	contents, err := io.ReadAll(file)
 	fmt.Println(string(contents))
 	// END OMIT
-
-}
-
-func osMethod() {
-
 }

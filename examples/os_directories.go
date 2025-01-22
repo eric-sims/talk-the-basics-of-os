@@ -5,14 +5,9 @@ import (
 )
 
 func main() {
-	makeAndRemoveDirectory()
-}
-
-// START OMIT
-func makeAndRemoveDirectory() {
+	// START OMIT
 	_ = os.Mkdir("example_dir", 0755) // HL
 	printDirectory()
 	_ = os.Remove("example_dir") // HL
+	// END OMIT
 }
-
-// END OMIT

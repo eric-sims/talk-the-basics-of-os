@@ -9,10 +9,9 @@ func main() {
 	createTempFile()
 }
 
-// START OMIT
 func createTempFile() {
+	// START OMIT
 	tempFile, _ := os.CreateTemp("/tmp", "someStuff_*.txt") // HL
 	fmt.Println("Created temp file:", tempFile.Name())
+	// END OMIT
 }
-
-// END OMIT

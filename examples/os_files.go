@@ -5,14 +5,13 @@ import (
 	"os"
 )
 
-// START OMIT
 func main() {
+	// START OMIT
 	file, _ := os.Create("example.txt") // HL
 	defer file.Close()
 
 	bytesWritten, _ := file.WriteString("Hello, Go!")
 
 	fmt.Println("bytes written:", bytesWritten)
+	// END OMIT
 }
-
-// END OMIT
