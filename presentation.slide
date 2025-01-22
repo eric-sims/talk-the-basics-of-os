@@ -1,0 +1,147 @@
+# Extensible Programming and the Golang 'os' Package
+23 January 2025
+// 04 February 2025
+
+Eric Sims
+Software Engineer, Vivint
+e.sims@icloud.com
+
+## packages/libraries/modules
+
+.html images/imageLayout.html
+- How is a library useful for writing a research paper?
+- Is the information inside a library 100% reliable and timeless?
+- How is a package useful for Amazon?
+- Have all of your Amazon boxes been a perfect size?
+
+: library - compiled information in one place - don't have to go on an archeological expedition
+: library downside - relying on the observation and evidence that authors have presented. May be out of date.
+: package - carrier doesn't have to worry about what is inside, easy transport
+: package downside - what if the contents inside the package are fragile and the carrier fails to document that?
+
+## packages/libraries/modules
+- What is their usefulness?
+- When should we make a package?
+- When should we _NOT_ make a package?
+
+## What is their usefulness?
+
+
+## What is their usefulness?
+- code reusability
+- modularity and maintainability
+- separation of concerns
+- time savings
+- establishing standard conformity
+
+: encapsulates logic
+: no need to reinvent the wheel
+: standard conformity - other engineering disciplines have this
+: must conform to certain protocols or SOPs
+
+## When to not use/make one
+
+
+## When to not use/make one
+- overhead for small programs (embedded devices)
+- premature modularity
+- no shared or reusable logic
+- dependency management concerns
+- legal or licensing concerns
+
+: be sure to double check that the 3rd party packages you use are kosher for use @vivint
+
+## standard libraries
+- built-in packages
+- pre-written, commonly used packages
+- Common standard libraries
+  - ways to deal with data types (strings)
+  - input/output interaction and signal processing
+  - multi-threaded programming
+  - date & time
+  - math
+  - error handling
+
+: no need to import the package or download it from the internet
+: written and managed by the languages designers
+: (likely the most optimal solution)
+: i/o - print statements, file management/creation,
+: go's HTTP library was a little too bare bones, so used Gin/Echo. But looks better to use solely in later versions.
+
+## How big should standard libraries be?
+- Minimalist
+  - _Tends to_ have better documentation
+- "Batteries included"
+  - Lots of libraries, feature rich
+
+- How would you categorize your favorite programming language?
+
+: C, C++, Go - minimalist
+: C#, Python - "batteries included"
+
+## Other ways of comparing standard libraries
+TODO: add details
+
+## Case for using standard library as much as possible
+
+[Start with the Go Standard Library](https://matthewsanabria.dev/posts/start-with-the-go-standard-library/)
+
+: Show the println example
+: Stdlib is good if you have to think about program size (i.e. embedded)
+
+
+## Golang os package
+
+## os
+- platform-agnostic, Unix-like way of interacting with operating system
+- errors handled in the "Go way"
+- why it matters: file manipulation, system configuration, and process control
+
+
+## File Operations
+.play -edit examples/os_files.go /START OMIT/,/END OMIT/
+
+## Temporary Files
+.play -edit examples/os_tempFiles.go /START OMIT/,/END OMIT/
+- Replaces last "*" with random string. If not defined, it will place random string at end.
+- Empty directory location stores files as defined in os.TempDir()
+
+## Changing Directories
+.play -edit examples/os_changeDirectories.go /START OMIT/,/END OMIT/
+
+## Directory Management
+.play -edit examples/os_directories.go /START OMIT/,/END OMIT/
+
+## Permissions, Modifying Files
+.play -edit examples/os_permissions.go /START OMIT/,/END OMIT/
+
+## Environment Variables
+.play -edit examples/os_envs.go /START OMIT/,/END OMIT/
+
+## Expand Env
+.play -edit examples/os_expandEnv.go /START OMIT/,/END OMIT/
+
+## Expand
+.play -edit examples/os_expand.go /START OMIT/,/END OMIT/
+- replaces ${var} or $var in the string based on the mapping function
+
+## Get Working Directory
+.play -edit examples/os_wd.go /START OMIT/,/END OMIT/
+
+## Rewrite 'ls'
+.play -edit examples/os_ls.go /START OMIT/,/END OMIT/
+
+## Processes
+.play -edit examples/os_pid.go /START OMIT/,/END OMIT/
+
+## This is bad!!
+.play -edit examples/os_rootBad.go /START OMIT/,/END OMIT/
+
+## Root (new! 1.24)
+.play -edit examples/os_root.go /START OMIT/,/END OMIT/
+
+: can play with "someOtherDir/../someOtherDir/hello.txt"
+
+## Let's build a shell!
+How I used these packages in a personal project:
+[TinyGoShell](https://github.com/eric-sims/TinyGoShell)

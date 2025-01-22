@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Python Quote</title>
+</head>
+<body>
+<div>
+  <blockquote cite="https://docs.python.org/3/tutorial/stdlib.html#batteries-included" style="margin: 20px">
+    <p>
+      Python has a “batteries included” philosophy. This is best seen through the sophisticated and robust capabilities of its larger packages.
+    </p>
+  </blockquote>
+    <p>
+      - Python Docs <cite>https://docs.python.org/3/tutorial/stdlib.html#batteries-included</cite>
+    </p>
+</div>
+</body>
+
+<style>
+  div:has(> blockquote) {
+    background-color: #ededed;
+    margin: 10px auto;
+    padding: 15px;
+    border-radius: 5px;
+  }
+
+  blockquote p::before {
+    content: '\201C';
+  }
+
+  blockquote p::after {
+    content: '\201D';
+  }
+
+  blockquote + p {
+    text-align: right;
+  }
+</style>
+</html>
