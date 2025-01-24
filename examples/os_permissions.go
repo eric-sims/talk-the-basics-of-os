@@ -8,6 +8,6 @@ import (
 func main() {
 	// START OMIT
 	os.CreateTemp("/tmp", "os_permissions")
-	os.Chmod("/tmp", fs.FileMode(0755))
+	os.Chmod("/tmp", fs.FileMode(0755)) // HL
 	// END OMIT
 }

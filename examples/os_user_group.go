@@ -8,13 +8,9 @@ import (
 func main() {
 	// START OMIT
 	ericUser, _ := user.Lookup("eric.sims")
-	printUserGroup(ericUser)
+	fmt.Printf("Group: %+v \n", ericUser)
 
 	currentUser, _ := user.Current()
-	printUserGroup(currentUser)
+	fmt.Printf("Group: %+v \n", currentUser)
 	// END OMIT
-}
-
-func printUserGroup(group *user.User) {
-	fmt.Printf("Group: %+v \n", group)
 }

@@ -1,17 +1,17 @@
 package main
 
 import (
-	"fmt"
 	"os"
 )
 
 func main() {
 	// START OMIT
 	file, _ := os.Create("example.txt") // HL
-	defer file.Close()
+	file.WriteString("Hello, there!")
+	file.Close()
 
-	bytesWritten, _ := file.WriteString("Hello, Go!")
-
-	fmt.Println("bytes written:", bytesWritten)
+	f, _ := os.OpenFile("example.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // HL
+	f.WriteString("some more text!")
+	f.Close()
 	// END OMIT
 }

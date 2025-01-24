@@ -1,4 +1,4 @@
-# Extensible Programming and the Golang 'os' Package
+# Practical System Programming with the Golang 'os' Package
 23 January 2025
 // 04 February 2025
 
@@ -6,113 +6,108 @@ Eric Sims
 Software Engineer, Vivint
 e.sims@icloud.com
 
-## packages/libraries/modules
+: My goal: Help you learn something new!
 
-.html images/imageLayout.html
-- How is a library useful for writing a research paper?
-- Is the information inside a library 100% reliable and timeless?
-- How is a package useful for Amazon?
-- Have all of your Amazon boxes been a perfect size?
+## Scripting
+- All scripting languages are programming languages
+- Usually line-by-line interpreter
+  - Interpreter halts during execution
 
-: library - compiled information in one place - don't have to go on an archeological expedition
-: library downside - relying on the observation and evidence that authors have presented. May be out of date.
-: package - carrier doesn't have to worry about what is inside, easy transport
-: package downside - what if the contents inside the package are fragile and the carrier fails to document that?
+: On the contrary: Compilers analyze and report errors collectively
+- Scripts
+  - Automate tasks (string together program executions)
+  - Extract information across files
+- Don't be fooled, a shell is just a program!
 
-## packages/libraries/modules
-- What is their usefulness?
-- When should we make a package?
-- When should we _NOT_ make a package?
+: Not compiled like C/C++ or Go
+: shells are just programs to interact with the OS and launch other programs
 
-## What is their usefulness?
-- Code reusability
-- Modularity and maintainability
-- Separation of concerns
-- Time savings
-- Establishing standards
-- Conforming to regulations (sometimes?)
+## Scripting
+- How do you use scripts in your work? (or personal?)
+  - What problems do scripts solve?
+- What languages do you develop scripts in?
 
-: encapsulates logic
-: no need to reinvent the wheel
-: standards allow the company to maintain a more unified codebase
-: conforming - using libraries with certain cryptographic protocols
+: I've seen lots of scripts for deployments (Dockerfile is a script)
 
-## When to not use/make one
-- Overhead for small programs (embedded devices)
-- Premature modularity
-- No shared or reusable logic
-- Dependency management concerns
-- Legal or licensing concerns
+## TODO: Prove that bash is WRONG
+```
+<insert scary 10_000 line bash script here>
+```
+- It's not, really
+- Shell scripts (can be) relatively simple (if kept small)
 
-: be sure to double check that the 3rd party packages you use are kosher for use @vivint
+: Bash is very useful and has its place!
+: The more I researched bash, the more I fell in love!
+: If there is little looping or data structures, bash is good.
+: My goal is to add another tool to your programmers tool belt.
 
-## standard libraries
-- Built-in packages
-- Pre-written, commonly used packages
-- Common standard libraries
-  - Ways to deal with data types (strings)
-  - Input/output interaction and signal processing
-  - Multi-threaded programming
-  - Date & time
-  - Math
-  - Error handling
-
-: no need to import the package or download it from the internet
-: written and managed by the languages designers
-: (likely the most optimal solution)
-: i/o - print statements, file management/creation,
-: go's HTTP library was a little too bare bones, so used Gin/Echo. But looks better to use solely in later versions.
-
-## standard libraries
-- What are things to look for in a standard library when deciding to use a programming language?
-
-## standard libraries
-- What are things to look for in a standard library when deciding to use a programming language?
-- Should the standard library be a part of our consideration process?
-
-## Scope of standard library
-- Minimalist
-  - _Tends to_ have better documentation
-- "Batteries included"
-  - Lots of libraries, feature rich
-
-- How would you categorize your favorite programming language?
-
-: C, C++, Go - minimalist
-: C#, Python - "batteries included"
-
-## Other ways of comparing standard libraries
+## Downsides of shell scripting
+- Complicated syntactic sugar
+- Limited structure
+- Lack of Libraries
 - Performance
-- Portability
-- Documentation
+- Single threaded
+- Security
 
-: portability - cross platform?
+: Syntax uses lots of symbols and operators that are hard to understand
+: Structure - Lacks classes, interfaces, error handling
+: Integrating 3rd party interactions can be hard, such as writing CLI commands with lots of flags or using curl to access APIs
+: Single threaded - bash lacks basic support for multi-threading - background processes, piping and PID's are full on processes - heavier than a thread
+: Security - Hard to do input sanitization
 
-## Case for using standard library as much as possible
+## Using golang
+- High performance and scalability
+- Advanced synchronization abilities (process versus thread)
+- Type safety and error handling
+- Libraries!
 
-[Start with the Go Standard Library](https://matthewsanabria.dev/posts/start-with-the-go-standard-library/)
+: briefly explain process versus thread
+: A process is an independent program that runs in its own memory space,
+: while a thread is a unit of execution within a process.
 
-: Show the println example
-: Stdlib is good if you have to think about program size (i.e. embedded)
+## There is a fine line - Should my script be an app?
 
-## Golang os package
+: there are many benefits to switching to a compiled language
+: better for a software developer who already works in the language
 
-## os
+: But there is a caveat to this. When should you switch over to a deployed application?
+
+## Golang scripts or a full fledged service/program?
+Things to consider:
+- One off, or occasional invocation?
+- Persistent connections?
+- Who needs to run this?
+- How often is it changed/managed?
+
+: Is the script just going to be run every once in a while?
+: Are there any persistent connections needed?
+: Do people other than developers need this run?
+: Should it be a button that triggers an api in a GUI?
+: If you can answer these questions, you are in luck!
+
+: THESIS: Go's os package simplifies system-level programing while enabling the ability to use more robust programming constructs.
+
+## Writing a script-like, system-level program in Go
+
+## os package
 - Platform-agnostic, Unix-like way of interacting with operating system
   - Portable!
 - Errors handled in the "Go way"
-- Most useful: Can write scripts
-  - Environment variables, files/directory management, signal handling, piping, temporary files
-  - Type safety and error handling - improvements over bash
-  - Libraries!
+- Most useful (for writing scripts)
+  - Environment variables
+  - files/directory management
+  - signal handling
+  - piping
+  - temporary files
 
-: Ability to make a shell-equivalent script while simultaneously having access to other powerful libraries
+: Can write a script that'll work on any OS
+: Simplifies system level tasks (rather than overusing the exec command)
+: Can expand a script to import 3rd party libraries to accomplish advanced things.
 
-## Let's play a game!
-- What is the shell equivalent to the following functions in golang's `os` library?
 
 ## Get Working Directory
 .play -edit examples/os_wd.go /START OMIT/,/END OMIT/
+- What is the shell equivalent to this?
 
 ## Get Working Directory
 .play -edit examples/os_wd.go /START OMIT/,/END OMIT/
@@ -128,25 +123,48 @@ pwd
 .play -edit examples/os_changeDirectories.go /START OMIT/,/END OMIT/
 Similar to:
 ```
-pwd
 cd examples
-pwd
 ```
 
-## Directory Management
+## Add/Remove Directories
 .play -edit examples/os_directories.go /START OMIT/,/END OMIT/
 
-## Directory Management
+: os.MkdirAll("mkdir_ex/sub_dir/parent/child", 0755)
+: os.RemoveAll("mkdir_ex/sub_dir/parent/child")
+
+## Add/Remove Directories
 .play -edit examples/os_directories.go /START OMIT/,/END OMIT/
 Similar to:
 ```
-mkdir example_dir
-rm -rf example_dir
+mkdir mkdir_ex
+rm -r mkdir_ex # technically not correct
 ```
+
+: os.MkdirAll("mkdir_ex/sub_dir/parent/child", 0755)
+: os.RemoveAll("mkdir_ex/sub_dir/parent/child")
 
 ## File Operations
 .play -edit examples/os_files.go /START OMIT/,/END OMIT/
 
+For reference:
+```
+// Flags to OpenFile wrapping those of the underlying system. Not all
+// flags may be implemented on a given system.
+const (
+	// Exactly one of O_RDONLY, O_WRONLY, or O_RDWR must be specified.
+	O_RDONLY int = syscall.O_RDONLY // open the file read-only.
+	O_WRONLY int = syscall.O_WRONLY // open the file write-only.
+	O_RDWR   int = syscall.O_RDWR   // open the file read-write.
+	// The remaining values may be or'ed in to control behavior.
+	O_APPEND int = syscall.O_APPEND // append data to the file when writing.
+	O_CREATE int = syscall.O_CREAT  // create a new file if none exists.
+	O_EXCL   int = syscall.O_EXCL   // used with O_CREATE, file must not exist.
+	O_SYNC   int = syscall.O_SYNC   // open for synchronous I/O.
+	O_TRUNC  int = syscall.O_TRUNC  // truncate regular writable file when opened.
+)
+```
+
+: os.OpenFile allows us to append
 
 ## File Operations
 .play -edit examples/os_files.go /START OMIT/,/END OMIT/
@@ -154,40 +172,23 @@ Similar to:
 ```
 touch example.txt
 echo "Hello, Go! > example.txt"
-cat example.txt` (kind of, not really)
+cat example.txt
 ```
 
-## Editing a file
-.play -edit examples/os_appendToFile.go /START OMIT/,/END OMIT/
+[File Functions](https://pkg.go.dev/os@go1.23.5#File)
 
-: called redirection operator
-
-## Editing a file
-Stream redirection (for files)
-- `<` stdin
-- `>` stdout
-- `2>` stderr
-- Commands with double angled brackets do NOT overwrite destination's existing contents.
-
-Write to a file:
-```
-echo "Hello, world!" > temp.txt
-```
-Append to a file
-```
-echo "How are you?" >> temp.txt
-```
-
+## File operations - redirection and piping
 Pipes (`|`) are for connecting two program streams together, brackets (`>`) are just meant to be written to a file.
-
-: redirect to stdin (<) example: a file contains a list of inputs for a program
+```
+ls -al | wc -l
+```
 
 ## Temporary Files
 .play -edit examples/os_tempFiles.go /START OMIT/,/END OMIT/
 - Replaces last "*" with random string. If not defined, it will place random string at end.
 - Empty directory location stores files as defined in os.TempDir()
 
-Is there a shell command like this?
+Can you think of a shell command like this?
 
 ## Temporary Files
 .play -edit examples/os_tempFiles.go /START OMIT/,/END OMIT/
@@ -195,6 +196,17 @@ Similar to:
 ```
 mktemp -t someStuff_XXXX.txt
 ```
+
+## This is bad!!
+.play -edit examples/os_rootBad.go /START OMIT/,/END OMIT/
+- Watch out for what input you allow a program to have.
+
+## Root (new! go 1.24)
+.play -edit examples/os_root.go /START OMIT/,/END OMIT/
+
+: can play with "someOtherDir/../someOtherDir/hello.txt"
+: prevents access to files and directories not in this root
+: great consideration for security
 
 ## Permissions, Modifying Files
 .play -edit examples/os_permissions.go /START OMIT/,/END OMIT/
@@ -214,6 +226,7 @@ chmod tmp 0755
 Similar to:
 ```
 RANDOM_ENV='Hello, world!'; echo $RANDOM_ENV
+env
 ```
 
 ## Expand Env
@@ -226,19 +239,17 @@ RANDOM_ENV='Hello, world!'; echo $RANDOM_ENV
 ## Processes
 .play -edit examples/os_pid.go /START OMIT/,/END OMIT/
 
+## Processes
+.play -edit examples/os_pid.go /START OMIT/,/END OMIT/
+```
+echo $$
+echo $PPID
+echo $0
+```
+
 ## Rewrite 'ls'
 .play -edit examples/os_ls.go /START OMIT/,/END OMIT/
 
-## This is bad!!
-.play -edit examples/os_rootBad.go /START OMIT/,/END OMIT/
-- Watch out for what input you allow a program to have.
-
-## Root (new! go 1.24)
-.play -edit examples/os_root.go /START OMIT/,/END OMIT/
-
-: can play with "someOtherDir/../someOtherDir/hello.txt"
-: prevents access to files and directories not in this root
-: great consideration for security
 
 ## os/exec
 
@@ -289,6 +300,29 @@ Similar to:
 echo -n '{"Name": "Bob", "Age": 32}' | jq -r '"\(.Name) is \(.Age) years old"'
 ```
 
+## File operations - redirection and piping
+Stream redirection for files. This _overwrites_ files.
+- `<` stdin
+- `>` stdout
+- `2>` stderr
+
+Stream redirection for files. This _appends_ files.
+- `<<` stdin
+- `>>` stdout
+- `2>>` stderr
+
+## Example
+Write to a file:
+```
+echo "Hello, world!" > temp.txt
+```
+Append to a file
+```
+echo "How are you?" >> temp.txt
+```
+
+: redirect to stdin (<) example: a file contains a list of inputs for a program
+
 ## os/signal
 
 ## os/signal
@@ -304,3 +338,15 @@ echo -n '{"Name": "Bob", "Age": 32}' | jq -r '"\(.Name) is \(.Age) years old"'
 
 ## Get user info
 .play -edit examples/os_user_group.go /START OMIT/,/END OMIT/
+
+## Pitfalls
+- Forgetting to close file handlers (use defer)
+- Overengineering small tasks-sometimes shell scripts are better
+- Not taking advantage of error handling
+
+## Q&A
+- Golang os Package - [https://pkg.go.dev/os](https://pkg.go.dev/os)
+- Scripting languages vs. programming languages: What's the difference? - [phoenix.edu](https://www.phoenix.edu/blog/scripting-vs-programming-languages.html#:~:text=While%20they're%20both%20integral,programming%20develops%20the%20applications%20themselves.&text=often%20requires%20understanding%20the%20differences%20between%20these%20languages.)
+
+
+: Closing thoughts - "The os package is your Swiss army knife for system-level programming in Go—efficient, reliable, and cross-platform."

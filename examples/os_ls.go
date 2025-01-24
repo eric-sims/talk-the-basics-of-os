@@ -8,19 +8,19 @@ import (
 func main() {
 	// START OMIT
 	dir := "."
-	if len(os.Args) > 1 {
+	if len(os.Args) > 1 { // HL
 		dir = os.Args[1]
 	}
 
-	files, err := os.ReadDir(dir)
+	dirEntries, err := os.ReadDir(dir) // HL
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error reading directory: %v\n", err)
-		os.Exit(1)
+		os.Exit(1) // HL
 	}
 
-	for _, file := range files {
-		name := file.Name()
-		if file.IsDir() {
+	for _, dirEntry := range dirEntries {
+		name := dirEntry.Name()
+		if dirEntry.IsDir() {
 			name += "/"
 		}
 		fmt.Println(name)

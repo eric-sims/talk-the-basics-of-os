@@ -19,9 +19,9 @@ func changeDirectory() {
 	printDirectory()
 }
 
+// END OMIT
+
 func printDirectory() {
-	d, _ := os.Getwd() // HL
+	d, _ := os.Getwd()
 	fmt.Println(d)
 }
-
-// END OMIT
